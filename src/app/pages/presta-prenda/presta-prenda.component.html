@@ -1,18 +1,75 @@
 <section>
   <aside>
-    <h2>Presta Prenda</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar, arcu consectetur fringilla finibus, mauris nisl pretium est, non varius orci augue sed elit. Etiam quam ipsum, accumsan sit amet erat sit amet, porta venenatis augue. Donec ut accumsan libero, sit amet accumsan felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet urna nulla. Quisque in justo ut justo laoreet consectetur id id nunc. Duis in laoreet mauris. Quisque tristique molestie leo, ac accumsan eros elementum quis. Curabitur vel orci ut nisl sagittis porta. Morbi sit amet lacinia est. Curabitur venenatis, mauris eu efficitur ultrices, diam augue vehicula velit, ullamcorper vehicula orci ante sed turpis. In in leo vel tellus ultrices dictum. Quisque venenatis, turpis eget pulvinar vehicula, libero ex aliquam quam, at congue felis purus vitae dolor. Etiam sit amet fermentum mi, vel varius purus.</p>
+    <h2>{{title}}</h2>
+    <p>{{text}}</p>
   </aside>
 
   <main>
-    <input-text/>
-    <input-text/>
-    <input-text/>
-    <input-text/>
-    <input-text/>
-    <input-text/>
-    <input-text/>
-    <input-text/>
+    @for (input of formList; track input) {
+      @switch (input.type) {
+        @case ('area') {
+          <input-area/>
+        }
+        @case ('color') {
+          <input-color/>
+        }
+        @case ('complete') {
+          <input-complete/>
+        }
+        @case ('date') {
+          <input-date/>
+        }
+        @case ('datetimelocal') {
+          <input-datetimelocal/>
+        }
+        @case ('email') {
+          <input-email/>
+        }
+        @case ('file') {
+          <input-file/>
+        }
+        @case ('list') {
+          <input-list/>
+        }
+        @case ('month') {
+          <input-month/>
+        }
+        @case ('number') {
+          <input-number/>
+        }
+        @case ('password') {
+          <input-password/>
+        }
+        <!--
+        @case ('pickertime') {
+          <input-pickertime/>
+        }
+        @case ('pickerdate') {
+          <input-pickerdate/>
+        }
+        -->
+        @case ('search') {
+          <input-search/>
+        }
+        @case ('tel') {
+          <input-tel/>
+        }
+        @case ('text') {
+          <input-text/>
+        }
+        @case ('time') {
+          <input-time/>
+        }
+        @case ('url') {
+          <input-url/>
+        }
+        @case ('week') {
+          <input-week/>
+        }
+        @default {
+        }
+      }
+    }
   </main>
 
   <div>

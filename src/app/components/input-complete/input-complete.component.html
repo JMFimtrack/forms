@@ -1,0 +1,19 @@
+<mat-form-field  appearance="outline" hintLabel="Max 10 characters">
+  <mat-label>Complete</mat-label>
+  <input matInput #input
+    type="text" maxlength="10"
+    placeholder="Ex. Nougat"
+    [formControl]="nameFormControl"
+    [matAutocomplete]="auto"
+    (input)="onInput($event)" />
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    @for (option of filteredOptions | async; track option) {
+      <mat-option [value]="option">{{option}}</mat-option>
+    }
+  </mat-autocomplete>
+  @if ( !nameFormControl.hasError('required') && nameFormControl.hasError('pattern')) {
+    <mat-error>Please enter a valid name</mat-error>
+  } @else if (nameFormControl.hasError('required')) {
+    <mat-error>name is <strong>required</strong></mat-error>
+  }
+</mat-form-field>

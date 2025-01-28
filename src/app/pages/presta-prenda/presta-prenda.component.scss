@@ -48,7 +48,7 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   place-content: start center;
   place-items: start center;
-  gap: 1rem;
+  gap: 2rem 1rem;
 
   min-width: 320px;
   width: 100%;

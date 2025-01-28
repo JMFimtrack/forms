@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" hintLabel="Max 10 characters">
-  <mat-label>Text</mat-label>
+  <mat-label>DateTime</mat-label>
     <input matInput #input
-    type="text" maxlength="10"
+    type="datetime-local" maxlength="10"
     placeholder="Ex. Nougat"
     [formControl]="nameFormControl"
     (input)="onInput($event)" />

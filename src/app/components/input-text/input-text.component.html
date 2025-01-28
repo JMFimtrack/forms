@@ -1,17 +1,14 @@
-<mat-form-field hintLabel="Max 10 characters">
+<mat-form-field appearance="outline" hintLabel="Max 10 characters">
   <mat-label>Enter some input</mat-label>
     <input matInput #input
     type="text" maxlength="10"
     placeholder="Ex. Nougat"
     [formControl]="nameFormControl"
     (input)="onInput($event)" />
-    @if (nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')) {
+    @if ( !nameFormControl.hasError('required') && nameFormControl.hasError('pattern')) {
       <mat-error>Please enter a valid name</mat-error>
-    }
-    @if (nameFormControl.hasError('required')) {
+    } @else if (nameFormControl.hasError('required')) {
       <mat-error>name is <strong>required</strong></mat-error>
     }
   <mat-hint align="end">{{value().length}}/10</mat-hint>
 </mat-form-field>
-
-<h1>{{nameFormControl.value}}</h1>

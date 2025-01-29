@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal, inject, Input} from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -23,6 +23,8 @@ import { DataFormService } from "../../services/data-form.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPickerdateComponent {
+  @Input() values: any = {};
+
   //protected dataForm = inject(DataFormService);
   //protected readonly value = signal('');
   ////  value: Date;

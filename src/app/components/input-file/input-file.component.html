@@ -18,7 +18,7 @@
 <section>
   <main>
     <form>
-      <label for="imageInput">Click subir imagenes!</label>
+      <label for="imageInput">{{values.label}}</label>
       <input id="imageInput" type="file" accept=".jpg, .jpeg, .png" multiple (change)="capture($event)">
       <p>Click for up file</p>
     </form>

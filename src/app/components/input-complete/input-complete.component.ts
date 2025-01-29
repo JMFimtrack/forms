@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal, inject, OnInit, Input} from '@angular/core';
 import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -23,6 +23,8 @@ import { DataFormService } from "../../services/data-form.service";
   ]
 })
 export class InputCompleteComponent {
+  @Input() values: any = {};
+
   protected dataForm = inject(DataFormService);
   protected readonly value = signal('');
 
@@ -37,7 +39,6 @@ export class InputCompleteComponent {
     this.dataForm.setData(this.nameFormControl.value || '');
     console.log('this', this.dataForm.getData());
     console.log(this.nameFormControl.errors);
-
   }
 
   ngOnInit() {

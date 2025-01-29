@@ -20,6 +20,8 @@ import { InputTimeComponent } from "../../components/input-time/input-time.compo
 import { InputUrlComponent } from "../../components/input-url/input-url.component";
 import { InputWeekComponent } from "../../components/input-week/input-week.component";
 
+import { SkelAnimationComponent } from "../../components/skel-animation/skel-animation.component";
+
 @Component({
   selector: 'app-presta-prenda',
   imports: [
@@ -41,7 +43,8 @@ import { InputWeekComponent } from "../../components/input-week/input-week.compo
     InputTextComponent,
     InputTimeComponent,
     InputUrlComponent,
-    InputWeekComponent
+    InputWeekComponent,
+    SkelAnimationComponent
   ],
   templateUrl: './presta-prenda.component.html',
   styleUrl: './presta-prenda.component.scss'

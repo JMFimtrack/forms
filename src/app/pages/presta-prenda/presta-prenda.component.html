@@ -6,68 +6,74 @@
 
   <main>
     @for (input of formList; track input) {
-      @switch (input.type) {
-        @case ('area') {
-          <input-area/>
+      @defer (on viewport) {
+        @switch (input.type) {
+          @case ('area') {
+            <input-area [values]="input"/>
+          }
+          @case ('color') {
+            <input-color [values]="input"/>
+          }
+          @case ('complete') {
+            <input-complete [values]="input"/>
+          }
+          @case ('date') {
+            <input-date [values]="input"/>
+          }
+          @case ('datetimelocal') {
+            <input-datetimelocal [values]="input"/>
+          }
+          @case ('email') {
+            <input-email [values]="input"/>
+          }
+          @case ('file') {
+            <input-file [values]="input"/>
+          }
+          @case ('list') {
+            <input-list [values]="input"/>
+          }
+          @case ('month') {
+            <input-month [values]="input"/>
+          }
+          @case ('number') {
+            <input-number [values]="input"/>
+          }
+          @case ('password') {
+            <input-password [values]="input"/>
+          }
+          <!--
+          @case ('pickertime') {
+            <input-pickertime [values]="input"/>
+          }
+          @case ('pickerdate') {
+            <input-pickerdate [values]="input"/>
+          }
+          -->
+          @case ('search') {
+            <input-search [values]="input"/>
+          }
+          @case ('tel') {
+            <input-tel [values]="input"/>
+          }
+          @case ('text') {
+            <input-text [values]="input"/>
+          }
+          @case ('time') {
+            <input-time [values]="input"/>
+          }
+          @case ('url') {
+            <input-url [values]="input"/>
+          }
+          @case ('week') {
+            <input-week [values]="input"/>
+          }
+          @default {
+          }
         }
-        @case ('color') {
-          <input-color/>
-        }
-        @case ('complete') {
-          <input-complete/>
-        }
-        @case ('date') {
-          <input-date/>
-        }
-        @case ('datetimelocal') {
-          <input-datetimelocal/>
-        }
-        @case ('email') {
-          <input-email/>
-        }
-        @case ('file') {
-          <input-file/>
-        }
-        @case ('list') {
-          <input-list/>
-        }
-        @case ('month') {
-          <input-month/>
-        }
-        @case ('number') {
-          <input-number/>
-        }
-        @case ('password') {
-          <input-password/>
-        }
-        <!--
-        @case ('pickertime') {
-          <input-pickertime/>
-        }
-        @case ('pickerdate') {
-          <input-pickerdate/>
-        }
-        -->
-        @case ('search') {
-          <input-search/>
-        }
-        @case ('tel') {
-          <input-tel/>
-        }
-        @case ('text') {
-          <input-text/>
-        }
-        @case ('time') {
-          <input-time/>
-        }
-        @case ('url') {
-          <input-url/>
-        }
-        @case ('week') {
-          <input-week/>
-        }
-        @default {
-        }
+      } @loading {
+        <skel-animation/>
+      } @placeholder {
+        <skel-animation/>
       }
     }
   </main>

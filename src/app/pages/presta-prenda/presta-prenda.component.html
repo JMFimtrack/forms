@@ -6,7 +6,7 @@
 
   <main>
     @for (input of formList; track input) {
-      @defer (on viewport) {
+      @defer (when data.length != 0) {
         @switch (input.type) {
           @case ('area') {
             <input-area [values]="input"/>

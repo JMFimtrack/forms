@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { InputAreaComponent } from "../../components/input-area/input-area.component";
 import { InputColorComponent } from "../../components/input-color/input-color.component";
@@ -21,6 +21,8 @@ import { InputUrlComponent } from "../../components/input-url/input-url.componen
 import { InputWeekComponent } from "../../components/input-week/input-week.component";
 
 import { SkelAnimationComponent } from "../../components/skel-animation/skel-animation.component";
+
+import { DataSheetsService } from "../../services/data-sheets.service";
 
 @Component({
   selector: 'app-presta-prenda',
@@ -50,6 +52,9 @@ import { SkelAnimationComponent } from "../../components/skel-animation/skel-ani
   styleUrl: './presta-prenda.component.scss'
 })
 export class PrestaPrendaComponent {
+  private apiUrl = inject(DataSheetsService);
+  public data: any = [];
+
   public title: string = "Presta prenda"
   public text: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar, arcu consectetur fringilla finibus, mauris nisl pretium est, non varius orci augue sed elit. Etiam quam ipsum, accumsan sit amet erat sit amet, porta venenatis augue. Donec ut accumsan libero, sit amet accumsan felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet urna nulla. Quisque in justo ut justo laoreet consectetur id id nunc. Duis in laoreet mauris. Quisque tristique molestie leo, ac accumsan eros elementum quis. Curabitur vel orci ut nisl sagittis porta. Morbi sit amet lacinia est. Curabitur venenatis, mauris eu efficitur ultrices, diam augue vehicula velit, ullamcorper vehicula orci ante sed turpis. In in leo vel tellus ultrices dictum. Quisque venenatis, turpis eget pulvinar vehicula, libero ex aliquam quam, at congue felis purus vitae dolor. Etiam sit amet fermentum mi, vel varius purus.`
 
@@ -59,12 +64,12 @@ export class PrestaPrendaComponent {
       label: 'Plaza'
     },
     {
-      type: 'list',
-      label: 'Servicio requerido'
-    },
-    {
       type: 'complete',
       label: 'Tiendas'
+    },
+    {
+      type: 'list',
+      label: 'Servicio requerido'
     },
     {
       type: 'file',
@@ -99,6 +104,26 @@ export class PrestaPrendaComponent {
       label: 'Horario instalacion'
     },
   ];
+
+  // if plaza filter data of store
+  // if service
+  //  retiro run documento para retiro de unidad + regular forms
+  //  install : ine, facture, pago service + regular forms
+  //  mantenimiento only regular forms
+  // regular forms
+  //  number contract
+  //  titular
+  //  serie
+  //  date
+
+  ngOnInit() {
+    const chargeData = async () => {
+      console.log('calling');
+      this.data = await this.apiUrl.getData()
+      console.log(this.data);
+    };
+    chargeData();
+  };
 }
 // { type: 'area' },
 // { type: 'color' },

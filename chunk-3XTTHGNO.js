@@ -1,0 +1,1 @@
+import{Db as p,Sa as n,nb as t,ob as r}from"./chunk-IYB5VF6F.js";var s=class e{static \u0275fac=function(o){return new(o||e)};static \u0275cmp=n({type:e,selectors:[["app-error-not-found"]],decls:2,vars:0,template:function(o,i){o&1&&(t(0,"p"),p(1,"error-not-found works!"),r())},encapsulation:2})};export{s as ErrorNotFoundComponent};

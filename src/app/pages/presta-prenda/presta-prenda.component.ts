@@ -23,6 +23,7 @@ import { InputWeekComponent } from "../../components/input-week/input-week.compo
 import { SkelAnimationComponent } from "../../components/skel-animation/skel-animation.component";
 
 import { DataSheetsService } from "../../services/data-sheets.service";
+import { ShareCompleteService } from "../../services/share-complete.service";
 
 @Component({
   selector: 'app-presta-prenda',
@@ -53,7 +54,12 @@ import { DataSheetsService } from "../../services/data-sheets.service";
 })
 export class PrestaPrendaComponent {
   private apiUrl = inject(DataSheetsService);
+  private shareComplete = inject(ShareCompleteService);
   public data: any = [];
+  private cleanData: any = {
+    plazas: [],
+    tiendas: {}
+  };
 
   public title: string = "Presta prenda"
   public text: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar, arcu consectetur fringilla finibus, mauris nisl pretium est, non varius orci augue sed elit. Etiam quam ipsum, accumsan sit amet erat sit amet, porta venenatis augue. Donec ut accumsan libero, sit amet accumsan felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet urna nulla. Quisque in justo ut justo laoreet consectetur id id nunc. Duis in laoreet mauris. Quisque tristique molestie leo, ac accumsan eros elementum quis. Curabitur vel orci ut nisl sagittis porta. Morbi sit amet lacinia est. Curabitur venenatis, mauris eu efficitur ultrices, diam augue vehicula velit, ullamcorper vehicula orci ante sed turpis. In in leo vel tellus ultrices dictum. Quisque venenatis, turpis eget pulvinar vehicula, libero ex aliquam quam, at congue felis purus vitae dolor. Etiam sit amet fermentum mi, vel varius purus.`
@@ -71,22 +77,22 @@ export class PrestaPrendaComponent {
       type: 'list',
       label: 'Servicio requerido'
     },
-    {
-      type: 'file',
-      label: 'INE'
-    },
-    {
-      type: 'file',
-      label: 'Factura unidad'
-    },
-    {
-      type: 'file',
-      label: 'Pago servicio'
-    },
-    {
-      type: 'file',
-      label: 'Documento Retiro'
-    },
+    //{
+    //  type: 'file',
+    //  label: 'INE'
+    //},
+    //{
+    //  type: 'file',
+    //  label: 'Factura unidad'
+    //},
+    //{
+    //  type: 'file',
+    //  label: 'Pago servicio'
+    //},
+    //{
+    //  type: 'file',
+    //  label: 'Documento Retiro'
+    //},
     {
       type: 'text',
       label: 'Numero Contrato'
@@ -105,42 +111,65 @@ export class PrestaPrendaComponent {
     },
   ];
 
-  // if plaza filter data of store
-  // if service
-  //  retiro run documento para retiro de unidad + regular forms
-  //  install : ine, facture, pago service + regular forms
-  //  mantenimiento only regular forms
-  // regular forms
-  //  number contract
-  //  titular
-  //  serie
-  //  date
+  retiro = [
+    {
+      type: 'file',
+      label: 'Documento Retiro'
+    },
+  ]
 
-  ngOnInit() {
-    const chargeData = async () => {
-      console.log('calling');
-      this.data = await this.apiUrl.getData()
-      console.log(this.data);
-    };
-    chargeData();
+  instalacion = [
+    {
+      type: 'file',
+      label: 'INE'
+    },
+    {
+      type: 'file',
+      label: 'Factura unidad'
+    },
+    {
+      type: 'file',
+      label: 'Pago servicio'
+    },
+  ]
+
+  public onInput(event: string) {
+    const service = this.shareComplete.getServicio()
+
+    // Índice donde deseas insertar el array
+    let indice = 3;
+
+    service === 'mantenimiento'
+      ? null
+      : service === 'retiro'
+        ? this.formList = [
+          ...this.formList.slice(0, indice),
+          ...this.retiro,
+          ...this.formList.slice(indice)
+        ]
+        : service === 'instalacion'
+          ? this.formList = [
+            ...this.formList.slice(0, indice),
+            ...this.instalacion,
+            ...this.formList.slice(indice)
+          ]
+          : null;
+  }
+
+  async ngOnInit() {
+    await (async () => this.data = await this.apiUrl.getData())();
+
+    await this.data.forEach((element: any) => {
+      this.cleanData.plazas.push(String(element.entidad));
+      this.cleanData.tiendas[element.entidad] === undefined
+       ? this.cleanData.tiendas[element.entidad] = []
+       : this.cleanData.tiendas[element.entidad] = [
+           ...this.cleanData.tiendas[element.entidad],
+           element.nombre_pdc
+         ];
+    });
+
+    this.cleanData.plazas = await [...new Set(this.cleanData.plazas)];
+    this.shareComplete.setData(this.cleanData);
   };
-}
-// { type: 'area' },
-// { type: 'color' },
-// { type: 'complete' },
-// { type: 'date' },
-// { type: 'datetimelocal' },
-// { type: 'email' },
-// { type: 'file' },
-// { type: 'list' },
-// { type: 'month' },
-// { type: 'number' },
-// { type: 'password' },
-// { type: 'pickerdate' },
-// { type: 'pickertime' },
-// { type: 'search' },
-// { type: 'tel' },
-// { type: 'text' },
-// { type: 'time' },
-// { type: 'url' },
-// { type: 'week' }
+};

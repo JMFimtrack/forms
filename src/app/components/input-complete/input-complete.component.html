@@ -1,14 +1,21 @@
 <mat-form-field  appearance="outline" hintLabel="Max 10 characters">
   <mat-label>{{values.label}}</mat-label>
   <input matInput #input
-    type="text" maxlength="10"
+    type="text" maxlength="200"
     placeholder="Ex. Nougat"
     [formControl]="nameFormControl"
     [matAutocomplete]="auto"
-    (input)="onInput($event)" />
+    (click)="onInput($event, 'click')"
+    (mouseover)="onInput($event, 'click')"
+    (mouseup)="onInput($event, 'click')"
+    (keydown)="onInput($event, 'keydown')"/>
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    @for (option of filteredOptions | async; track option) {
-      <mat-option [value]="option">{{option}}</mat-option>
+    @defer (when options.length !== 0) {
+      @if (1) {
+        @for (option of filteredOptions | async; track option) {
+          <mat-option (click)="onInput($event, 'click')" [value]="option">{{option}}</mat-option>
+        }
+      }
     }
   </mat-autocomplete>
   @if ( !nameFormControl.hasError('required') && nameFormControl.hasError('pattern')) {

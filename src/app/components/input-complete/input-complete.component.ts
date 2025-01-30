@@ -8,6 +8,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { DataFormService } from "../../services/data-form.service";
+import { ShareCompleteService } from "../../services/share-complete.service";
+
+interface InterfaceValues {
+  type?: string,
+  label?: string
+}
 
 @Component({
   selector: 'input-complete',
@@ -25,32 +31,60 @@ import { DataFormService } from "../../services/data-form.service";
 export class InputCompleteComponent {
   @Input() values: any = {};
 
+  protected shareComplete = inject(ShareCompleteService);
   protected dataForm = inject(DataFormService);
+  protected data = this.shareComplete.getData();
   protected readonly value = signal('');
+  public element: string = '';
 
   protected nameFormControl = new FormControl(this.value(), [Validators.required]);
 
-  options: string[] = ['One', 'Two', 'Three'];
+  options: any = [];
   filteredOptions!: Observable<string[]>;
 
-  protected onInput(event: Event) {
-    this.value.set((event.target as HTMLInputElement).value);
+  protected setData() {
+    const plaza = this.shareComplete.getPlaza();
+    this.element = plaza;
 
-    this.dataForm.setData(this.nameFormControl.value || '');
-    console.log('this', this.dataForm.getData());
-    console.log(this.nameFormControl.errors);
+    this.values.label === 'Plaza'
+      ? this.options = this.data.plazas
+      : this.values.label === 'Tiendas' && plaza !== ''
+        ? this.options = this.data.tiendas[plaza]
+        : this.options = []
+
+    return
   }
+
+  protected onInput(event: Event, type: string) {
+    let isValue = '';
+
+    type === 'click'
+      ? isValue = (event.target as HTMLInputElement).innerText
+      : type === 'keydown'
+        ? isValue = (event.target as HTMLInputElement).value
+        : null;
+
+    this.values.label === 'Plaza'
+     ? this.shareComplete.setPlaza(isValue)
+     : this.values.label === 'Tiendas'
+      ? this.shareComplete.setTienda(isValue)
+      : null;
+
+    this.setData();
+
+    return
+  };
 
   ngOnInit() {
     this.filteredOptions = this.nameFormControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+    this.setData();
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((option: any) => option.toLowerCase().includes(filterValue));
   }
 }

@@ -30,7 +30,7 @@
             <input-file [values]="input"/>
           }
           @case ('list') {
-            <input-list [values]="input"/>
+            <input-list [values]="input" (servicesEvent)="onInput($event)"/>
           }
           @case ('month') {
             <input-month [values]="input"/>

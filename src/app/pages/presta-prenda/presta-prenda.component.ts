@@ -20,6 +20,9 @@ import { InputTimeComponent } from "../../components/input-time/input-time.compo
 import { InputUrlComponent } from "../../components/input-url/input-url.component";
 import { InputWeekComponent } from "../../components/input-week/input-week.component";
 
+import { InputButtonComponent } from "../../components/input-button/input-button.component";
+import { InputCleanComponent } from "../../components/input-clean/input-clean.component";
+
 import { SkelAnimationComponent } from "../../components/skel-animation/skel-animation.component";
 
 import { DataSheetsService } from "../../services/data-sheets.service";
@@ -47,7 +50,9 @@ import { ShareCompleteService } from "../../services/share-complete.service";
     InputTimeComponent,
     InputUrlComponent,
     InputWeekComponent,
-    SkelAnimationComponent
+    SkelAnimationComponent,
+    InputButtonComponent,
+    InputCleanComponent
   ],
   templateUrl: './presta-prenda.component.html',
   styleUrl: './presta-prenda.component.scss'

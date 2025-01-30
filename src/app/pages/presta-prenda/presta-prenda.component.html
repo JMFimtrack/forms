@@ -78,6 +78,23 @@
     }
   </main>
 
+  <footer>
+    @defer (when data.length != 0) {
+      <input-clean/>
+    } @loading {
+      <skel-animation/>
+    } @placeholder {
+      <skel-animation/>
+    }
+    @defer (when data.length != 0) {
+      <input-button/>
+    } @loading {
+      <skel-animation/>
+    } @placeholder {
+      <skel-animation/>
+    }
+  </footer>
+
   <div>
   </div>
 </section>

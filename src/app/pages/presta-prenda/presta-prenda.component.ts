@@ -64,7 +64,9 @@ export class PrestaPrendaComponent {
   public title: string = "Presta prenda"
   public text: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar, arcu consectetur fringilla finibus, mauris nisl pretium est, non varius orci augue sed elit. Etiam quam ipsum, accumsan sit amet erat sit amet, porta venenatis augue. Donec ut accumsan libero, sit amet accumsan felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet urna nulla. Quisque in justo ut justo laoreet consectetur id id nunc. Duis in laoreet mauris. Quisque tristique molestie leo, ac accumsan eros elementum quis. Curabitur vel orci ut nisl sagittis porta. Morbi sit amet lacinia est. Curabitur venenatis, mauris eu efficitur ultrices, diam augue vehicula velit, ullamcorper vehicula orci ante sed turpis. In in leo vel tellus ultrices dictum. Quisque venenatis, turpis eget pulvinar vehicula, libero ex aliquam quam, at congue felis purus vitae dolor. Etiam sit amet fermentum mi, vel varius purus.`
 
-  public formList: any[] = [
+  public formList: any[] = [];
+
+  start = [
     {
       type: 'complete',
       label: 'Plaza'
@@ -77,22 +79,9 @@ export class PrestaPrendaComponent {
       type: 'list',
       label: 'Servicio requerido'
     },
-    //{
-    //  type: 'file',
-    //  label: 'INE'
-    //},
-    //{
-    //  type: 'file',
-    //  label: 'Factura unidad'
-    //},
-    //{
-    //  type: 'file',
-    //  label: 'Pago servicio'
-    //},
-    //{
-    //  type: 'file',
-    //  label: 'Documento Retiro'
-    //},
+  ]
+
+  end = [
     {
       type: 'text',
       label: 'Numero Contrato'
@@ -109,7 +98,7 @@ export class PrestaPrendaComponent {
       type: 'datetimelocal',
       label: 'Horario instalacion'
     },
-  ];
+  ]
 
   retiro = [
     {
@@ -136,27 +125,18 @@ export class PrestaPrendaComponent {
   public onInput(event: string) {
     const service = this.shareComplete.getServicio()
 
-    // Índice donde deseas insertar el array
-    let indice = 3;
-
     service === 'mantenimiento'
-      ? null
+      ? this.formList = [...this.start, ...this.end]
       : service === 'retiro'
-        ? this.formList = [
-          ...this.formList.slice(0, indice),
-          ...this.retiro,
-          ...this.formList.slice(indice)
-        ]
+        ? this.formList = [...this.start, ...this.retiro, ...this.end]
         : service === 'instalacion'
-          ? this.formList = [
-            ...this.formList.slice(0, indice),
-            ...this.instalacion,
-            ...this.formList.slice(indice)
-          ]
+          ? this.formList = [...this.start, ...this.instalacion, ...this.end]
           : null;
   }
 
   async ngOnInit() {
+    this.formList = [...this.start, ...this.end]
+
     await (async () => this.data = await this.apiUrl.getData())();
 
     await this.data.forEach((element: any) => {

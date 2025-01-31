@@ -6,6 +6,7 @@ import { Injectable, signal, Signal } from '@angular/core';
 export class DataFormService {
   //protected data: Signal<any> = signal({});
   protected data: string = '';
+  protected dataForm = new FormData();
 
   constructor() { }
 
@@ -15,5 +16,13 @@ export class DataFormService {
 
   setData(data: string) {
     return this.data = data
+  }
+
+  getFormData() {
+    return this.dataForm;
+  }
+
+  setFormData(nameData: string, data: string) {
+    return this.dataForm.append(nameData, data);
   }
 }

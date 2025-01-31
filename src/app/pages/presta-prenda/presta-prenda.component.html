@@ -87,7 +87,7 @@
       <skel-animation/>
     }
     @defer (when data.length != 0) {
-      <input-button/>
+      <input-button (click)="send($event)"/>
     } @loading {
       <skel-animation/>
     } @placeholder {

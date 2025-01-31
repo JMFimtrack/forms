@@ -70,6 +70,14 @@ export class InputCompleteComponent {
       ? this.shareComplete.setTienda(isValue)
       : null;
 
+
+    this.dataForm.setFormData(this.values.label, isValue)
+    //this.values.label === 'Plaza'
+    // ? this.dataForm.setFormData('plaza', isValue)
+    // : this.values.label === 'Tiendas'
+    //  ? this.dataForm.setFormData('tienda', isValue)
+    //  : null;
+
     this.setData();
 
     return

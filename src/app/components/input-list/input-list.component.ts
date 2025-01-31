@@ -33,11 +33,14 @@ export class InputListComponent {
 
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLElement).innerText);
+    const isValue = (event.target as HTMLElement).innerText;
 
     this.dataForm.setData(this.nameFormControl.value || '');
     this.shareComplete.setServicio(this.nameFormControl.value || '');
     //this.servicesEvent.emit(this.nameFormControl.value || '');
     this.servicesEvent.emit(this.nameFormControl.value || '');
+
+    this.dataForm.setFormData(this.values.label, isValue)
 
     return
   }

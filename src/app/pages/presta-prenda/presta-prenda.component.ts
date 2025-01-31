@@ -26,6 +26,7 @@ import { InputCleanComponent } from "../../components/input-clean/input-clean.co
 import { SkelAnimationComponent } from "../../components/skel-animation/skel-animation.component";
 
 import { DataSheetsService } from "../../services/data-sheets.service";
+import { DataFormService } from "../../services/data-form.service";
 import { ShareCompleteService } from "../../services/share-complete.service";
 
 @Component({
@@ -60,6 +61,7 @@ import { ShareCompleteService } from "../../services/share-complete.service";
 export class PrestaPrendaComponent {
   private apiUrl = inject(DataSheetsService);
   private shareComplete = inject(ShareCompleteService);
+  private dataForm = inject(DataFormService);
   public data: any = [];
   private cleanData: any = {
     plazas: [],
@@ -78,7 +80,7 @@ export class PrestaPrendaComponent {
     },
     {
       type: 'complete',
-      label: 'Tiendas'
+      label: 'Tienda'
     },
     {
       type: 'list',
@@ -137,6 +139,15 @@ export class PrestaPrendaComponent {
         : service === 'instalacion'
           ? this.formList = [...this.start, ...this.instalacion, ...this.end]
           : null;
+  }
+
+  public send(event: Event) {
+    //console.log(event);
+    //this.dataForm.setFormData('fuck', 'hola')
+    //this.dataForm.setFormData('shit', 'adios')
+    const element = this.dataForm.getFormData()
+    console.log(Object.fromEntries(element));
+
   }
 
   async ngOnInit() {

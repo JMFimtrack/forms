@@ -36,10 +36,11 @@ export class InputTextComponent {
 
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
+    const isValue = (event.target as HTMLInputElement).value;
 
     this.dataForm.setData(this.nameFormControl.value || '');
-    console.log('this', this.dataForm.getData());
-    console.log(this.nameFormControl.errors);
 
+    this.dataForm.setFormData(this.values.label, isValue)
+    return
   }
 }

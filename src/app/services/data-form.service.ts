@@ -22,7 +22,7 @@ export class DataFormService {
     return this.dataForm;
   }
 
-  setFormData(nameData: string, data: string) {
+  setFormData(nameData: string, data: string | File) {
     return this.dataForm.append(nameData, data);
   }
 }

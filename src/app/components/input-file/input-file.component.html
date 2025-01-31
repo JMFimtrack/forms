@@ -18,9 +18,18 @@
 <section>
   <main>
     <form>
-      <label for="imageInput">{{values.label}}</label>
-      <input id="imageInput" type="file" accept=".jpg, .jpeg, .png" multiple (change)="capture($event)">
-      <p>Click for up file</p>
+      <label for="{{values.control}}">{{values.label}}</label>
+      <input
+        id="{{values.control}}"
+        type="file"
+        accept="image/*"
+        [formControl]="nameFormControl"
+        (change)="capture($event)">
+      @if (nameData !== '') {
+        <p>{{nameData}}</p>
+      } @else {
+        <p>{{values.hint}}</p>
+      }
     </form>
   </main>
 </section>

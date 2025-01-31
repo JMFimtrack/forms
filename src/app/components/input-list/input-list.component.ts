@@ -40,7 +40,7 @@ export class InputListComponent {
     //this.servicesEvent.emit(this.nameFormControl.value || '');
     this.servicesEvent.emit(this.nameFormControl.value || '');
 
-    this.dataForm.setFormData(this.values.label, isValue)
+    this.dataForm.setFormData(this.values.control, isValue)
 
     return
   }

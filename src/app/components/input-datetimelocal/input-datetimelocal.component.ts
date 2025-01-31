@@ -29,7 +29,8 @@ export class InputDatetimelocalComponent {
     [
       Validators.required,
       Validators.minLength(16),
-      Validators.maxLength(16)
+      Validators.maxLength(16),
+      Validators.pattern('[1-90T:-]*')
     ]
   );
 
@@ -41,11 +42,7 @@ export class InputDatetimelocalComponent {
     //console.log('this', this.dataForm.getData());
     //console.log(this.nameFormControl.errors);
 
-    this.dataForm.setFormData(this.values.label, isValue)
-
-    console.log(this.value());
-    console.log(isValue);
-
+    this.dataForm.setFormData(this.values.control, isValue)
     return
   }
 

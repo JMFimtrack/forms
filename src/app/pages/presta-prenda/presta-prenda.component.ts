@@ -76,56 +76,111 @@ export class PrestaPrendaComponent {
   start = [
     {
       type: 'complete',
-      label: 'Plaza'
+      label: 'Plaza',
+      control: 'plaza',
+      hint: 'Max 200 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 200
     },
     {
       type: 'complete',
-      label: 'Tienda'
+      label: 'Tienda',
+      control: 'tienda',
+      hint: 'Max 200 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 200
     },
     {
       type: 'list',
-      label: 'Servicio requerido'
+      label: 'Servicio requerido',
+      control: 'servicio',
+      hint: 'Max 200 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 200
     },
   ]
 
   end = [
     {
       type: 'text',
-      label: 'Numero Contrato'
+      label: 'Numero Contrato',
+      control: 'contrato',
+      hint: 'Max 120 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 120
     },
     {
       type: 'text',
-      label: 'Nombre titular'
+      label: 'Nombre titular',
+      control: 'titular',
+      hint: 'Max 200 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 200
     },
     {
       type: 'text',
-      label: 'Serie unidad'
+      label: 'Serie unidad',
+      control: 'unidad',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 100
     },
     {
       type: 'datetimelocal',
-      label: 'Horario instalacion'
+      label: 'Horario instalacion',
+      control: 'horario',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 16,
+      max: 16
     },
   ]
 
   retiro = [
     {
       type: 'file',
-      label: 'Documento Retiro'
+      label: 'Documento Retiro',
+      control: 'retiro',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 100
     },
   ]
 
   instalacion = [
     {
       type: 'file',
-      label: 'INE'
+      label: 'INE',
+      control: 'ine',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 100
     },
     {
       type: 'file',
-      label: 'Factura unidad'
+      label: 'Factura unidad',
+      control: 'factura',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 100
     },
     {
       type: 'file',
-      label: 'Pago servicio'
+      label: 'Pago servicio',
+      control: 'pago',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 10,
+      max: 100
     },
   ]
 

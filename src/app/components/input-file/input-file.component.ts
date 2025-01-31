@@ -6,7 +6,6 @@ import {MatSelectModule} from '@angular/material/select';
 
 import { DataFormService } from "../../services/data-form.service";
 
-
 @Component({
   selector: 'input-file',
   templateUrl: './input-file.component.html',
@@ -25,25 +24,19 @@ export class InputFileComponent {
 
   protected dataForm = inject(DataFormService);
   protected readonly value = signal('');
+  public nameData: string = '';
 
-  protected nameFormControl = new FormControl(
-    this.value(),
-    [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern('[a-zA-Z ]*')
-    ]
-  );
+  protected nameFormControl = new FormControl(this.value(), [Validators.required]);
 
-  protected onInput(event: Event) {
-    this.value.set((event.target as HTMLInputElement).value);
-
-    this.dataForm.setData(this.nameFormControl.value || '');
-    console.log('this', this.dataForm.getData());
-    console.log(this.nameFormControl.errors);
-
+  protected capture(event: Event) {
+    const isValue = (event.target as HTMLInputElement).files![0];
+    if (isValue) {
+      this.dataForm.setFormData(this.values.control, isValue);
+      this.nameData = isValue.name;
+    }
   }
+}
+
 //
 //  protected readonly value = signal('');
 //  nombre = new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern("^[A-ZÑÁÉÍÓÚ1-90.,:/ ]*$")]);
@@ -56,15 +49,15 @@ export class InputFileComponent {
 //    });
 //  }
 //
-  capture(event: Event) {
-    //const value = (event.target as HTMLInputElement).value;
-    //if (value !== '') {
-    //  this.isDisabled = false;
-    //} else {
-    //  this.isDisabled = true;
-    //}
-    //this.value = value;
-  };
+//  capture(event: Event) {
+//    //const value = (event.target as HTMLInputElement).value;
+//    //if (value !== '') {
+//    //  this.isDisabled = false;
+//    //} else {
+//    //  this.isDisabled = true;
+//    //}
+//    //this.value = value;
+//  };
 //
 //  ngOnInit() {
 //    this.nombre.setValue(this.currentInputList[0].capture);
@@ -74,4 +67,3 @@ export class InputFileComponent {
 //      text:`${this.value()}`
 //    });
 //  }
-}

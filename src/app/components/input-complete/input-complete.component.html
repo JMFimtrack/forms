@@ -1,21 +1,23 @@
-<mat-form-field  appearance="outline" hintLabel="Max 10 characters">
+<mat-form-field appearance="outline" hintLabel="{{values.hint}}">
   <mat-label>{{values.label}}</mat-label>
   <input matInput #input
-    type="text" maxlength="200"
-    placeholder="Ex. Nougat"
+    id="{{values.control}}"
+    type="text"
+    maxlength="{{values.max}}"
+    placeholder="{{values.placeholder}}"
     [formControl]="nameFormControl"
     [matAutocomplete]="auto"
     (click)="onInput($event, 'click')"
-    (mouseover)="onInput($event, 'click')"
-    (mouseup)="onInput($event, 'click')"
+    (mouseover)="onInput($event, 'keydown')"
+    (mouseup)="onInput($event, 'keydown')"
     (keydown)="onInput($event, 'keydown')"/>
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-    @defer (when options.length !== 0) {
-      @if (1) {
-        @for (option of filteredOptions | async; track option) {
-          <mat-option (click)="onInput($event, 'click')" [value]="option">{{option}}</mat-option>
-        }
+    @defer (on interaction; when options.length !== 0) {
+      @for (option of filteredOptions | async; track option) {
+        <mat-option (click)="onInput($event, 'click')" [value]="option">{{option}}</mat-option>
       }
+    } @placeholder {
+      <p>''</p>
     }
   </mat-autocomplete>
   @if ( !nameFormControl.hasError('required') && nameFormControl.hasError('pattern')) {
@@ -24,3 +26,4 @@
     <mat-error>name is <strong>required</strong></mat-error>
   }
 </mat-form-field>
+{{values.control}}

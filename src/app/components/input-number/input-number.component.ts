@@ -28,9 +28,9 @@ export class InputNumberComponent {
     this.value(),
     [
       Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern('[a-zA-Z ]*')
+      Validators.minLength(this.values.min),
+      Validators.maxLength(this.values.max),
+      Validators.pattern('[1-90 ]*')
     ]
   );
 

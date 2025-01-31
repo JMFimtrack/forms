@@ -13,4 +13,7 @@ import { DataFormService } from "../../services/data-form.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputCleanComponent {
+  public clear(event: Event) {
+    location.reload();
+  }
 }

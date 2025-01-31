@@ -35,20 +35,24 @@ export class InputCompleteComponent {
   protected dataForm = inject(DataFormService);
   protected data = this.shareComplete.getData();
   protected readonly value = signal('');
-  public element: string = '';
 
-  protected nameFormControl = new FormControl(this.value(), [Validators.required]);
+  protected nameFormControl = new FormControl(
+    this.value(), [
+      Validators.required,
+      Validators.minLength(this.values.min),
+      Validators.maxLength(this.values.max),
+      Validators.pattern('[a-zA-Z ]*')
+    ]);
 
   options: any = [];
   filteredOptions!: Observable<string[]>;
 
-  protected setData() {
-    const plaza = this.shareComplete.getPlaza();
-    this.element = plaza;
+  protected  async setData() {
+    const plaza = await this.shareComplete.getPlaza();
 
     this.values.label === 'Plaza'
       ? this.options = this.data.plazas
-      : this.values.label === 'Tiendas' && plaza !== ''
+      : this.values.label === 'Tienda' && plaza !== ''
         ? this.options = this.data.tiendas[plaza]
         : this.options = []
 
@@ -66,18 +70,15 @@ export class InputCompleteComponent {
 
     this.values.label === 'Plaza'
      ? this.shareComplete.setPlaza(isValue)
-     : this.values.label === 'Tiendas'
+     : this.values.label === 'Tienda'
       ? this.shareComplete.setTienda(isValue)
       : null;
 
+    this.dataForm.setFormData(this.values.control, isValue)
 
-    this.dataForm.setFormData(this.values.label, isValue)
-    //this.values.label === 'Plaza'
-    // ? this.dataForm.setFormData('plaza', isValue)
-    // : this.values.label === 'Tiendas'
-    //  ? this.dataForm.setFormData('tienda', isValue)
-    //  : null;
-
+    this.setData();
+    this.setData();
+    this.setData();
     this.setData();
 
     return

@@ -13,4 +13,7 @@ import { DataFormService } from "../../services/data-form.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputButtonComponent {
+  public send(event: Event) {
+    alert('Formulario Enviado');
+  }
 }

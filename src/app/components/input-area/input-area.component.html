@@ -1,7 +1,8 @@
-<mat-form-field appearance="outline" hintLabel="Max 10 characters">
+<mat-form-field appearance="outline" hintLabel="{{values.hint}}">
   <mat-label>{{values.label}}</mat-label>
-    <textarea matInput placeholder="Ex. 100 Main St"
-j     placeholder="Ex. Nougat"
+    <textarea matInput
+      maxlength="{{values.max}}"
+      placeholder="{{values.placeholder}}"
       [formControl]="nameFormControl"
       (input)="onInput($event)"
       style="height: 26px;">

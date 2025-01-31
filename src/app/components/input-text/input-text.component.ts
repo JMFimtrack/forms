@@ -28,9 +28,9 @@ export class InputTextComponent {
     this.value(),
     [
       Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(10),
-      Validators.pattern('[a-zA-Z ]*')
+      Validators.minLength(this.values.min),
+      Validators.maxLength(this.values.max),
+      Validators.pattern('[a-zA-Z1-90 ]*')
     ]
   );
 
@@ -40,7 +40,7 @@ export class InputTextComponent {
 
     this.dataForm.setData(this.nameFormControl.value || '');
 
-    this.dataForm.setFormData(this.values.label, isValue)
+    this.dataForm.setFormData(this.values.control, isValue)
     return
   }
 }

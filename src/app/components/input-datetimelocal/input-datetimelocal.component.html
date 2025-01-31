@@ -1,8 +1,9 @@
-<mat-form-field appearance="outline" hintLabel="Max 10 characters">
+<mat-form-field appearance="outline" hintLabel="{{values.hint}}">
   <mat-label>{{values.label}}</mat-label>
     <input matInput #input
-    type="datetime-local" maxlength="200"
-    placeholder="Ex. Nougat"
+    type="datetime-local"
+    maxlength="{{values.max}}"
+    placeholder="{{values.placeholder}}"
     max="2222-06-14T00:00"
     [formControl]="nameFormControl"
     (input)="onInput($event)" />
@@ -11,5 +12,5 @@
     } @else if (nameFormControl.hasError('required')) {
       <mat-error>name is <strong>required</strong></mat-error>
     }
-  <mat-hint align="end">{{value().length}}/10</mat-hint>
+    <mat-hint align="end">{{value().length}}/{{values.max}}</mat-hint>
 </mat-form-field>

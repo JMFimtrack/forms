@@ -1,0 +1,1 @@
+import{Y as e}from"./chunk-JGPK7VZD.js";var o=class a{data="";dataForm=new FormData;constructor(){}getData(){return this.data}setData(t){return this.data=t}getFormData(){return this.dataForm}setFormData(t,r){return this.dataForm.append(t,r)}static \u0275fac=function(r){return new(r||a)};static \u0275prov=e({token:a,factory:a.\u0275fac,providedIn:"root"})};export{o as a};

@@ -41,7 +41,7 @@ export class InputCompleteComponent {
       Validators.required,
       Validators.minLength(this.values.min),
       Validators.maxLength(this.values.max),
-      Validators.pattern('[a-zA-Z ]*')
+      Validators.pattern('[a-zA-Z1-90 ]*')
     ]);
 
   options: any = [];

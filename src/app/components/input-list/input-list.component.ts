@@ -31,6 +31,8 @@ export class InputListComponent {
 
   protected nameFormControl = new FormControl(this.value(), [Validators.required]);
 
+  public inputList: any = []
+
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLElement).innerText);
     const isValue = (event.target as HTMLElement).innerText;
@@ -43,5 +45,72 @@ export class InputListComponent {
     this.dataForm.setFormData(this.values.control, isValue)
 
     return
+  }
+
+  protected getHours() {
+    const hoursList = [
+      {value: '09:00', text: '09:00'},
+      {value: '10:00', text: '10:00'},
+      {value: '11:00', text: '11:00'},
+      {value: '12:00', text: '12:00'},
+      {value: '13:00', text: '13:00'},
+      {value: '14:00', text: '14:00'},
+      {value: '15:00', text: '15:00'},
+      {value: '16:00', text: '16:00'},
+      {value: '17:00', text: '17:00'},
+      {value: '18:00', text: '18:00'},
+      {value: '19:00', text: '19:00'}
+    ]
+
+    const ahora = new Date();
+    const limite = new Date(ahora.getTime() + 2 * 60 * 60 * 1000);
+
+    return hoursList.filter(hora => {
+        const [horaStr, minutoStr] = hora.value.split(':');
+        const fechaHora = new Date(ahora);
+        fechaHora.setHours(parseInt(horaStr), parseInt(minutoStr), 0, 0);
+
+        return fechaHora > limite;
+    });
+  };
+
+  protected getDates() {
+    const dates = [];
+    const hoy = new Date();
+    const fechaInicio = new Date(hoy);
+
+    fechaInicio.setDate(hoy.getDate() + 1);
+
+    for (let i = 0; i < 15; i++) {
+      const fechaActual = new Date(fechaInicio);
+      fechaActual.setDate(fechaInicio.getDate() + i);
+
+      const dayOfWeek = fechaActual.getDay();
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        continue;
+      }
+
+      const day = String(fechaActual.getDate()).padStart(2, '0');
+      const month = String(fechaActual.getMonth() + 1).padStart(2, '0');
+      const year = fechaActual.getFullYear();
+      const fechaFormateada = `${day}-${month}-${year}`;
+
+      dates.push({
+        value: fechaFormateada,
+        text: fechaFormateada
+      });
+    }
+
+    return dates;
+  };
+
+  ngOnInit() {
+    this.values.label === 'Servicio requerido'
+      ? null
+      : this.values.label === 'Dia instalacion'
+        ? this.inputList = this.getDates()
+        : this.values.label === 'Hora instalacion'
+          ? this.inputList = this.getHours()
+          : null;
   }
 }

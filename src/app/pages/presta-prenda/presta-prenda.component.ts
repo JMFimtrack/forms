@@ -132,8 +132,17 @@ export class PrestaPrendaComponent {
       max: 100
     },
     {
-      type: 'datetimelocal',
-      label: 'Horario instalacion',
+      type: 'list',
+      label: 'Dia instalacion',
+      control: 'horario',
+      hint: 'Max 100 characters',
+      placeholder: 'Ex. Nougat',
+      min: 16,
+      max: 16
+    },
+    {
+      type: 'list',
+      label: 'Hora instalacion',
       control: 'horario',
       hint: 'Max 100 characters',
       placeholder: 'Ex. Nougat',

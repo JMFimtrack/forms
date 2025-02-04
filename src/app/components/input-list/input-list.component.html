@@ -1,9 +1,19 @@
 <mat-form-field appearance="outline" hintLabel="{{values.hint}}">
   <mat-label>{{values.label}}</mat-label>
     <mat-select [formControl]="nameFormControl">
-      <mat-option value="mantenimiento" (click)="onInput($event)">Mantenimiento</mat-option>
-      <mat-option value="retiro" (click)="onInput($event)">Retiro  de equipo</mat-option>
-      <mat-option value="instalacion" (click)="onInput($event)">Instalacion de equipo</mat-option>
+      @if (values.label === 'Servicio requerido') {
+        <mat-option value="mantenimiento" (click)="onInput($event)">Mantenimiento</mat-option>
+        <mat-option value="retiro" (click)="onInput($event)">Retiro  de equipo</mat-option>
+        <mat-option value="instalacion" (click)="onInput($event)">Instalacion de equipo</mat-option>
+      } @else if (values.label === 'Dia instalacion') {
+        @for(input of inputList; track input) {
+          <mat-option value="input.value" (click)="onInput($event)">{{input.text}}</mat-option>
+        }
+      } @else if (values.label === 'Hora instalacion') {
+        @for(input of inputList; track input) {
+          <mat-option value="input.value" (click)="onInput($event)">{{input.text}}</mat-option>
+        }
+      }
     </mat-select>
     @if ( !nameFormControl.hasError('required') && nameFormControl.hasError('pattern')) {
       <mat-error>Please enter a valid name</mat-error>

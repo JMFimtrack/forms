@@ -60,17 +60,24 @@ export class InputListComponent {
       {value: '17:00', text: '17:00'},
       {value: '18:00', text: '18:00'},
       {value: '19:00', text: '19:00'}
-    ]
+    ];
 
     const ahora = new Date();
-    const limite = new Date(ahora.getTime() + 2 * 60 * 60 * 1000);
+
+    if (ahora.getHours() >= 21) {
+        return [];
+    }
+
+    if (ahora.getHours() < 15) {
+        return hoursList;
+    }
 
     return hoursList.filter(hora => {
         const [horaStr, minutoStr] = hora.value.split(':');
-        const fechaHora = new Date(ahora);
-        fechaHora.setHours(parseInt(horaStr), parseInt(minutoStr), 0, 0);
+        const horaDate = new Date(ahora);
+        horaDate.setHours(parseInt(horaStr), parseInt(minutoStr), 0, 0);
 
-        return fechaHora > limite;
+        return horaDate >= ahora;
     });
   };
 
